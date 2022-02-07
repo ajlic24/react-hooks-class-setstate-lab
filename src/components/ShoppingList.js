@@ -2,7 +2,7 @@ import React from "react";
 import Item from "./Item";
 
 class ShoppingList extends React.Component {
-  
+
   // const [selectedCategory, setSelectedCategory] = useState("All");
 
   state = {
@@ -15,14 +15,16 @@ class ShoppingList extends React.Component {
   }
 
   // we want to filter the items to only display the ones based on the selected category
-  itemsToDisplay = this.props.items.filter((item) => {
+  itemsToDisplay = () => {
+    return this.props.items.filter((item) => {
     if (this.state.selectedCategory === "All") return true;
-
+    
     return item.category === this.state.selectedCategory
-  });
+  })
+};
 
   render() {
-    console.log(this.itemsToDisplay)
+    // console.log(this.itemsToDisplay)
     return (
       <div className="ShoppingList">
         <div className="Filter">
@@ -34,7 +36,7 @@ class ShoppingList extends React.Component {
           </select>
         </div>
         <ul className="Items">
-          {this.itemsToDisplay.map((item) => (
+          {this.itemsToDisplay().map((item) => (
             <Item key={item.id} name={item.name} category={item.category} />
           ))}
         </ul>
